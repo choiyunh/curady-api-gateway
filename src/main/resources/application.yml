@@ -18,7 +18,7 @@ spring:
           predicates:
             - Path=/user-service/**
           filters:
-            - CustomFilter
+            - RewritePath=/user-service/(?<path>.*), /$\{path}
         - id: lecture-service
           uri: lb://LECTURE-SERVICE
           predicates:
@@ -30,7 +30,7 @@ spring:
           predicates:
             - Path=/review-service/**
           filters:
-            - CustomFilter
+            - RewritePath=/user-service/(?<path>.*), /$\{path}
         - id: openapi
           uri: http://localhost:${server.port}
           predicates:
