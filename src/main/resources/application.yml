@@ -24,17 +24,24 @@ spring:
           predicates:
             - Path=/lecture-service/**
           filters:
-            - CustomFilter
+            - RewritePath=/lecture-service/(?<path>.*), /$\{path}
         - id: review-service
           uri: lb://REVIEW-SERVICE
           predicates:
             - Path=/review-service/**
           filters:
             - CustomFilter
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:3000"
+            allowed-origin-patterns:
+              - '*'
             allow-credentials: true
             allowedHeaders:
               - x-requested-with
@@ -49,7 +56,11 @@ spring:
               - PUT
               - OPTIONS
               - DELETE
-
+springdoc:
+  swagger-ui:
+    urls:
+      - name: lecture
+        url: /v3/api-docs/lecture-service
 
 
 eureka:
