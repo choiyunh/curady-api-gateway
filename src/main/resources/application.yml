@@ -1,6 +1,5 @@
 server:
   port: 8000
-  address: 127.0.0.1
 
 spring:
   application:
@@ -33,7 +32,7 @@ spring:
           filters:
             - CustomFilter
         - id: openapi
-          uri: http://${server.address}:${server.port}
+          uri: http://localhost:${server.port}
           predicates:
             - Path=/v3/api-docs/**
           filters:
@@ -63,7 +62,6 @@ springdoc:
       - name: lecture
         url: /v3/api-docs/lecture-service
 
-
 eureka:
   client:
     fetch-registry: true
@@ -76,14 +74,10 @@ spring:
     activate:
       on-profile: local
 
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-server:
-  address: 127.0.0.1
 
 ---
 
@@ -96,6 +90,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://10.0.140.187:8761/eureka
-
-server:
-  address: 13.124.70.83
