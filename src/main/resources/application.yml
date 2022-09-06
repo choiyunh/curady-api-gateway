@@ -59,8 +59,13 @@ spring:
 springdoc:
   swagger-ui:
     urls:
+      - name: user
+        url: /v3/api-docs/user-service
       - name: lecture
         url: /v3/api-docs/lecture-service
+      - name: review
+        url: /v3/api-docs/review-service
+
 
 eureka:
   client:
