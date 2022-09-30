@@ -42,6 +42,8 @@ spring:
           '[/**]':
             allowed-origins:
               - "http://localhost:3000"
+              - "http://curady.kr"
+              - "https://curady.kr"
             allow-credentials: true
             allowedHeaders:
               - x-requested-with
