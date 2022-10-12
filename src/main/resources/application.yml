@@ -30,7 +30,7 @@ spring:
           predicates:
             - Path=/review-service/**
           filters:
-            - RewritePath=/user-service/(?<path>.*), /$\{path}
+            - RewritePath=/review-service/(?<path>.*), /$\{path}
         - id: openapi
           uri: http://localhost:${server.port}
           predicates:
