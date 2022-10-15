@@ -2,6 +2,8 @@ server:
   port: 8000
 
 spring:
+  jwt:
+    secretKey: zbfpel
   application:
     name: api-gateway-service
   cloud:
@@ -25,12 +27,14 @@ spring:
             - Path=/lecture-service/**
           filters:
             - RewritePath=/lecture-service/(?<path>.*), /$\{path}
+            - JwtAuthenticationFilter
         - id: review-service
           uri: lb://REVIEW-SERVICE
           predicates:
             - Path=/review-service/**
           filters:
             - RewritePath=/review-service/(?<path>.*), /$\{path}
+            - JwtAuthenticationFilter
         - id: openapi
           uri: http://localhost:${server.port}
           predicates:
