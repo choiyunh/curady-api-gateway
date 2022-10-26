@@ -43,7 +43,12 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
                 }
                 String token = exchange.getRequest().getHeaders().get("X-AUTH-TOKEN").get(0);
                 Map<String, Object> userInfo = jwtUtil.getClaims(token);
+                if (userInfo == null) {
+                    ServerHttpResponse response = exchange.getResponse();
+                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
 
+                    return response.setComplete();
+                }
                 addAuthorizationHeaders(exchange.getRequest(), userInfo);
             }
             return chain.filter(exchange);
